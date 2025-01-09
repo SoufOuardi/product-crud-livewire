@@ -9,17 +9,18 @@ use Livewire\Component;
 class EditModal extends Component
 {
     public $isOpen = false;
-    public $product_name;
-    public $product_price;
-    public $category;
-    public $product_description;
-    public $product_brand;
+    public $name;
+    public $price;
+    public $category_id;
+    public $description;
+    public $brand;
 
     protected $rules = [
-        'product_name' => 'required|unique:products,product_name',
-        'product_price' => 'required',
-        'product_brand' => 'required',
-        'category' => 'required'
+        'name' => 'required|max:40|unique:products,name',
+        'price' => 'required|numeric',
+        'brand' => 'required|max:15',
+        'description' => 'max:255',
+        'category_id' => 'required|exists:categories,id'
     ];
 
     public $product = null;
@@ -32,11 +33,11 @@ class EditModal extends Component
         Log::info("Opening delete page for product ID: $id");  // Check this log
         $this->product = null;
         $this->product = Product::findOrFail($id);
-        $this->product_name = $this->product->product_name;
-        $this->product_price = $this->product->product_price;
-        $this->category = $this->product->category;
-        $this->product_description = $this->product->product_description;
-        $this->product_brand = $this->product->product_brand;
+        $this->name = $this->product->name;
+        $this->price = $this->product->price;
+        $this->category_id = $this->product->category_id;
+        $this->description = $this->product->description;
+        $this->brand = $this->product->brand;
         $this->isEditBtn = true; 
     }
     public function close(){
@@ -44,12 +45,13 @@ class EditModal extends Component
         $this->product = null;
     }
     public function submit(){
+        $this->rules['name'] = 'required|max:44|unique:products,name,' . $this->product->id;
         $this->validate();
-        $this->product->product_name = $this->product_name;
-        $this->product->product_brand = $this->product_brand;
-        $this->product->product_price = $this->product_price;
-        $this->product->product_description = $this->product_description;
-        $this->product->category = $this->category;
+        $this->product->name = $this->name;
+        $this->product->brand = $this->brand;
+        $this->product->price = $this->price;
+        $this->product->description = $this->description;
+        $this->product->category_id = $this->category_id;
         $this->product->save();
         $this->emit('productAdded');
         $this->close();

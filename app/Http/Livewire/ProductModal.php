@@ -8,52 +8,55 @@ use Livewire\Component;
 class ProductModal extends Component
 {
     public $isOpen = false;
-    public $product_name;
-    public $product_price;
-    public $category;
-    public $product_description;
-    public $product_brand;
+    public $name;
+    public $price;
+    public $category_id;
+    public $description;
+    public $brand;
 
     protected $rules = [
-        'product_name' => 'required|unique:products,product_name',
-        'product_price' => 'required',
-        'product_brand' => 'required',
-        'category' => 'required'
+        'name' => 'required|unique:products,name',
+        'price' => 'required',
+        'brand' => 'required',
+        'category_id' => 'required'
     ];
 
     // Update the listener to match the emitted event
     protected $listeners = [
-        'StatusModal' => 'openProductModal',
+        'openProductModal',
         'retreiveData',
     ];
-    public function openProductModal($data){
-        $this->isOpen = $data;
+    public function openProductModal($isOpen){
+        $this->isOpen = $isOpen;
     }
+    
 
     public function close()
     {
         $this->isOpen = false;
     }
 
-    public function submit(){
-        $this->validate();
-        Product::create([
-            'product_name' => $this->product_name,
-            'product_brand' => $this->product_brand,
-            'product_price' => $this->product_price,
-            'product_description' => $this->product_description,
-        ]);
-        $this->resetInputFields();
-        $this->close();
-        $this->emit('productAdded');
-    }
+    public function submit()
+{
+    $this->validate();
+    Product::create([
+        'name' => $this->name,
+        'brand' => $this->brand,
+        'price' => $this->price,
+        'description' => $this->description,
+        'category_id' => $this->category_id,
+    ]);
+    $this->resetInputFields();
+    $this->close();
+    $this->emit('productAdded');
+}
 
     public function resetInputFields(){
-        $this->product_brand = "";
-        $this->product_name = "";
-        $this->product_price = "";
-        $this->product_description = "";
-        $this->category = "";
+        $this->brand = "";
+        $this->name = "";
+        $this->price = "";
+        $this->description = "";
+        $this->category_id = "";
     }
     public function render()
     {

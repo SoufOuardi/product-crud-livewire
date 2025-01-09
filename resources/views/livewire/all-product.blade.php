@@ -47,11 +47,11 @@
                     <tbody>
                         @foreach($retreivedData as $data)
                         <tr class="border-b dark:border-gray-700">
-                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$data->product_name}}&#34;</th>
-                            <td class="px-4 py-3">{{$data->category}}</td>
-                            <td class="px-4 py-3">{{$data->product_brand}}</td>
-                            <td class="px-4 py-3 max-w-[12rem] truncate">{{$data->product_description}}</td>
-                            <td class="px-4 py-3">${{$data->product_price}}</td>
+                            <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{$data->name}}&#34;</th>
+                            <td class="px-4 py-3">{{$data->category->name}}</td>
+                            <td class="px-4 py-3">{{$data->brand}}</td>
+                            <td class="px-4 py-3 max-w-[12rem] truncate">{{$data->description}}</td>
+                            <td class="px-4 py-3">${{$data->price}}</td>
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <button wire:click='tdActionBtn({{$data->id}})' id="apple-imac-27-dropdown-button" data-dropdown-toggle="apple-imac-27-dropdown" class="inline-flex items-center text-sm font-medium hover:bg-gray-100 dark:hover:bg-gray-700 p-1.5 dark:hover-bg-gray-800 text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">
                                     <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

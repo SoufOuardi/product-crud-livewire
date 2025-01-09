@@ -5,9 +5,11 @@
         <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
             <!-- Modal header -->
             <div class="flex justify-between mb-4 rounded-t sm:mb-5">
-                <div class="text-lg text-gray-900 md:text-xl dark:text-white">
-                    <h3 class="font-semibold ">{{$product->product_name}}”</h3>
-                    <p class="font-bold">${{$product->product_price}}</p>
+                <div class="text-gray-900 md:text-xl dark:text-white">
+                    <label class="mb-2 font-semibold leading-none text-gray-900 dark:text-white" for="">Product Name</label>
+                    <p class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{$product->name}}”</p>
+                    <label class="mb-2 font-semibold leading-none text-gray-900 dark:text-white" for="">Selling Price</label>
+                    <p class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">${{$product->price}}</p>
                 </div>
                 <div>
                     <button wire:click="close" type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 inline-flex dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="readProductModal">
@@ -18,7 +20,7 @@
                     </button>
                 </div>
             </div>
-            <dl><dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Details</dt><dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{$product->product_description}}</dd><dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Category</dt><dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{$product->category}}</dd></dl>
+            <dl><dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Details</dt><dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{$product->description}}</dd><dt class="mb-2 font-semibold leading-none text-gray-900 dark:text-white">Category</dt><dd class="mb-4 font-light text-gray-500 sm:mb-5 dark:text-gray-400">{{$product->category->name}}</dd></dl>
             
         </div>
         @endif

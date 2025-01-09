@@ -10,19 +10,14 @@ use Livewire\WithPagination;
 class AllProduct extends Component
 {
     use WithPagination;
-    public $isOpen = false;
     public $actionDropDown = false;
     public $retreivedData;
     public $isTdActionBtn = null;
-    public $isEditBtn = false;
-    public $isPreviewBtn = false;
-    public $isDelBtn = false;
 
     protected $listeners = ['productAdded' => 'retrieveData'];
 
     public function openProductModal(){
-        $this->isOpen = true;
-        $this->emit('StatusModal', $this->isOpen);
+        $this->emit('openProductModal', true);
     }  
 
     public function retrieveData(){
@@ -38,21 +33,17 @@ class AllProduct extends Component
         $this->actionDropDown = true;
     }
     public function tdActionBtn($id){
-        Log::info("Opening delete page for product ID: $id");
         $this->isTdActionBtn = $id;
     }
     public function openDelPage($id){
-        $this->isDelBtn = true;
-        $this->emit('openDelPage',$id, $this->isDelBtn);
+        $this->emit('openDelPage',$id, true);
     }
     public function editBtn($id){
-        $this->isEditBtn = true;
-        $this->emit('editBtn',$id,$this->isEditBtn);
+        $this->emit('editBtn',$id,true);
     }
 
     public function openPreview($id){
-        $this->isPreviewBtn = true;
-        $this->emit('openPreview',$id,$this->isPreviewBtn);
+        $this->emit('openPreview',$id,true);
     }
 
     public function deleteAll(){

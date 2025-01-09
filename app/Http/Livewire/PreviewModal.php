@@ -14,10 +14,10 @@ class PreviewModal extends Component
     public function mount(){
         $this->product = null;
     }
-    public function openPreview($id){
+    public function openPreview($id, $isPreviewBtn){
         Log::info("Opening delete page for product ID: $id");  // Check this log
         $this->product = Product::findOrFail($id);
-        $this->isPreviewBtn = true;
+        $this->isPreviewBtn = $isPreviewBtn;
     }
 
     public function close(){

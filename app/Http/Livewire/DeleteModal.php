@@ -22,7 +22,6 @@ class DeleteModal extends Component
     public function deleteRow(){
         $this->thisProduct->delete();
         $this->emit('productAdded');
-        $this->thisProduct = null;
         $this->close();
     }
 
