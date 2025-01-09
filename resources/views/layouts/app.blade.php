@@ -10,9 +10,7 @@
 
     <!-- Livewire Styles -->
     @livewireStyles
-
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 </head>
 <body>
 
@@ -21,17 +19,20 @@
         @yield('content') <!-- This is where child views will be injected -->
     </main>
 
-
-    <!-- Livewire Scripts -->
-    @livewireScripts
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-    <!-- Toastr JS script to display notifications -->
-    <script type="text/javascript">
-        window.livewire.on('alert', param => {
-        toastr[param['type']](param['message'],param['type'])});
-</script>
+    @livewireScripts
+
+    <script>
+    Livewire.on('productAdded', (message) => {
+        toastr.success(message, 'Success');
+    });
+    Livewire.on('productError', (message) => {
+        toastr.error(message, 'Error');
+    });
+    </script>
+
 
 </body>
 </html>

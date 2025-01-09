@@ -45,6 +45,7 @@ class EditModal extends Component
         $this->product = null;
     }
     public function submit(){
+        try {
         $this->rules['name'] = 'required|max:44|unique:products,name,' . $this->product->id;
         $this->validate();
         $this->product->name = $this->name;
@@ -53,9 +54,12 @@ class EditModal extends Component
         $this->product->description = $this->description;
         $this->product->category_id = $this->category_id;
         $this->product->save();
-        $this->emit('productAdded');
+        $this->emit('productAdded', 'Successfully Edited The Product');
         $this->close();
-        $this->product = null;
+    }catch(\Exception $e){
+        $this->emit('productEditedError', $e->getMessage());
+    }
+
     }
     public function mount(){
         $this->product = null;
